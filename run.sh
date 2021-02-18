@@ -1,0 +1,2 @@
+. .env
+npm run dev
