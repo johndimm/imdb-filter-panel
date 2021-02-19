@@ -159,14 +159,13 @@ const Movies = () => {
 
 	return (
 		<div>
+			<div
+				className={styles.popup_background}
+				style={{ display: spinnerDisplay }}
+			>
+				<div className={styles.spinner}></div>
+			</div>
 			<div className={styles.movies} onScroll={onScroll}>
-				<div
-					className={styles.popup_background}
-					style={{ display: spinnerDisplay }}
-				>
-					<div className={styles.spinner}></div>
-				</div>
-
 				<FilterPanel
 					originalArray={data}
 					callback={setFilteredData}
