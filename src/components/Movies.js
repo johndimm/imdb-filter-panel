@@ -115,6 +115,7 @@ const Movies = () => {
 	const [oneMovie, setOneMovie] = useState(null)
 	const [page, setPage] = useState(0)
 	const [query, setQuery] = useState('')
+	const [spinnerDisplay, setSpinnerDisplay] = useState('block')
 
 	const getData = async () => {
 		const url = '/api/movies/get/'
@@ -122,6 +123,7 @@ const Movies = () => {
 		const data = await response.json()
 		setData(data)
 		setFilteredData(data)
+		setSpinnerDisplay('none')
 	}
 
 	const isBottom = (el) => {
@@ -156,22 +158,27 @@ const Movies = () => {
 		})
 
 	return (
-		<div className={styles.movies} onScroll={onScroll}>
-			<FilterPanel
-				originalArray={data}
-				callback={setFilteredData}
-				className={styles.filter_panel}
-				query={query}
-				filterDef={filterDef}
-				searchFields={searchFields}
-			/>
-			<div id='app' className={styles.movie_cards}>
-				{movie_cards}
-				{selectedMovie}
-			</div>
+		<div>
+			<div className={styles.movies} onScroll={onScroll}>
+				<div
+					className={styles.popup_background}
+					style={{ display: spinnerDisplay }}
+				>
+					<div className={styles.spinner}></div>
+				</div>
 
-			<div id='main-div'>
-				<div id='spinner'></div>
+				<FilterPanel
+					originalArray={data}
+					callback={setFilteredData}
+					className={styles.filter_panel}
+					query={query}
+					filterDef={filterDef}
+					searchFields={searchFields}
+				/>
+				<div id='app' className={styles.movie_cards}>
+					{movie_cards}
+					{selectedMovie}
+				</div>
 			</div>
 		</div>
 	)

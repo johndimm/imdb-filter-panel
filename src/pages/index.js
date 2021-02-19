@@ -1,7 +1,7 @@
-import Movies from '../components/Movies';
+import Movies from '../components/Movies'
 
 function MainPage() {
-  return <Movies />;
+	return <Movies />
 }
 
-export default MainPage;
+export default MainPage
