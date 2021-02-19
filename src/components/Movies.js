@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import FilterPanel from './FilterPanel'
 import styles from './Movies.module.css'
+import Head from 'next/head'
 
 const MOVIES_PER_PAGE = 30
 
@@ -159,6 +160,12 @@ const Movies = () => {
 
 	return (
 		<div>
+			<Head>
+				<meta
+					name='viewport'
+					content='width=device-width, initial-scale=.5, maximum-scale=12.0, minimum-scale=.25, user-scalable=yes'
+				/>
+			</Head>
 			<div
 				className={styles.popup_background}
 				style={{ display: spinnerDisplay }}
