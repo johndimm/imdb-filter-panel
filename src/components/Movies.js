@@ -169,6 +169,10 @@ const Movies = () => {
 				{movie_cards}
 				{selectedMovie}
 			</div>
+
+			<div id='main-div'>
+				<div id='spinner'></div>
+			</div>
 		</div>
 	)
 }

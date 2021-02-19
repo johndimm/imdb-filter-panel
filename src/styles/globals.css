@@ -1,22 +1,53 @@
 html,
 body {
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
-  cursor: pointer;
+	color: inherit;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 input:placeholder-shown {
-  font-style: italic;
+	font-style: italic;
+}
+
+#main-div {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+#spinner {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 75px;
+	height: 75px;
+	border: 5px solid #fff;
+	border-radius: 50%;
+	border-top-color: transparent;
+	animation: spin 2s infinite linear;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
