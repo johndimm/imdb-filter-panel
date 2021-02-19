@@ -7,17 +7,17 @@ const MOVIES_PER_PAGE = 30
 
 const filterDef = [
 	{ title: 'Genre', field: 'genre1' },
-	{ title: 'Decade', field: 'decade', order: 'alpha' },
-	{ title: 'Year', field: 'year' },
-	{ title: 'Type', field: 'type' },
-	{ title: 'Language', field: 'language1' },
+	{ title: 'Awards and Nominations', field: 'big_award' },
 	{ title: 'Country', field: 'country1' },
+	{ title: 'Language', field: 'language1' },
 	{ title: 'Content Rating', field: 'rated' },
 	{ title: 'IMDB Rating', field: 'rating', order: 'alpha' },
 	{ title: 'Actor', field: 'actor1' },
 	{ title: 'Director', field: 'director1' },
 	{ title: 'Writer', field: 'writer1' },
-	{ title: 'Production', field: 'production' }
+	{ title: 'Production', field: 'production' },
+	{ title: 'Decade', field: 'decade', order: 'alpha' },
+	{ title: 'Year', field: 'year', order: 'alpha' }
 ]
 
 const searchFields = [
@@ -100,7 +100,7 @@ const onError = (e) => {
 
 const Card = ({ movie, onClick }) => {
 	return (
-		<div className={styles.movie_card} onClick={onClick}>
+		<div className={styles.movie_card} onClick={onClick} title={movie.title}>
 			<div className={styles.movie_title}>{movie.title}</div>
 			<div className={styles.movie_plot}>{movie.plot}</div>
 			<div>

@@ -16,10 +16,21 @@ select *,
   split_part(language, ',', 1) as language1,
   split_part(country, ',', 1) as country1,
   left(ratings_value,1)  as rating,
-  concat(substring(year,1,3),'0') as decade
+  concat(substring(year,1,3),'0') as decade,
+  '' as big_award
 from movies_xfer;
 
+update movies
+set big_award = 'Oscar'
+where awards like '%Oscar%';
 
+update movies
+set big_award = 'Golden Globe'
+where awards like '%Golden Globe%';
+
+update movies
+set big_award = 'BAFTA'
+where awards like '%BAFTA%';
 
 
 

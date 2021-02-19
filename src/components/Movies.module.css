@@ -52,10 +52,10 @@
 
 .movie_card img {
 	position: absolute;
-	top: 50px;
-	left: 30px;
-	max-height: 250px;
-	max-width: 170px;
+	top: 5px;
+	left: 5px;
+	max-height: 310px;
+	max-width: 215px;
 }
 
 .movie_title {
@@ -148,4 +148,28 @@
 	to {
 		transform: rotate(360deg);
 	}
+}
+
+.title_bar {
+	width: 100%;
+}
+
+.app_name {
+	display: inline-block;
+	margin: auto;
+	margin-left: 12px;
+	font-size: 32pt;
+	font-weight: 600;
+	width: 400px;
+	padding: 0px;
+	font-style: italic;
+}
+
+.app_info {
+	display: inline-block;
+	float: right;
+	margin: auto;
+	margin-left: 100px;
+	width: 100px;
+	padding: 7px;
 }

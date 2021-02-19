@@ -1,7 +1,13 @@
 import Movies from '../components/Movies'
+import TitleBar from '../components/TitleBar'
 
 function MainPage() {
-	return <Movies />
+	return (
+		<div>
+			<TitleBar />
+			<Movies />
+		</div>
+	)
 }
 
 export default MainPage
