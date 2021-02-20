@@ -6,16 +6,16 @@ import Head from 'next/head'
 const MOVIES_PER_PAGE = 30
 
 const filterDef = [
-	{ title: 'Genre', field: 'genre1' },
+	{ title: 'Genre', field: 'genre', isList: true },
 	{ title: 'Awards and Nominations', field: 'big_award' },
-	{ title: 'Country', field: 'country1' },
-	{ title: 'Language', field: 'language1' },
+	{ title: 'Country', field: 'country', isList: true },
+	{ title: 'Language', field: 'language', isList: true },
 	{ title: 'Content Rating', field: 'rated' },
 	{ title: 'IMDB Rating', field: 'rating', order: 'alpha' },
-	{ title: 'Actor', field: 'actor1' },
-	{ title: 'Director', field: 'director1' },
-	{ title: 'Writer', field: 'writer1' },
-	{ title: 'Production', field: 'production' },
+	{ title: 'Actor', field: 'actors', isList: true },
+	{ title: 'Director', field: 'director', isList: true },
+	{ title: 'Writer', field: 'writer', isList: true },
+	{ title: 'Production', field: 'production', isList: true },
 	{ title: 'Decade', field: 'decade', order: 'alpha' },
 	{ title: 'Year', field: 'year', order: 'alpha' }
 ]
@@ -31,6 +31,7 @@ const searchFields = [
 
 const detailFields = [
 	'genre',
+	'released',
 	'actors',
 	'director',
 	'writer',

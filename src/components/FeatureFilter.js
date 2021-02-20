@@ -17,14 +17,28 @@ const FeatureFilter = ({
 	field,
 	callback,
 	mergedMasks,
-	order
+	order,
+	isList
 }) => {
 	const [checkedBoxes, setCheckedBoxes] = useState({})
 	const [showAll, setShowAll] = useState(false)
 
+	const truncateAt = (s, c) => {
+		let v = s
+		const parenLoc = v.indexOf(c)
+		if (parenLoc != -1) {
+			v = v.substr(0, parenLoc)
+		}
+		return v
+	}
+
 	const updateCounts = () => {
 		let c = {}
 
+		const updateHash = (v) => {
+			if (v in c) c[v]++
+			else c[v] = 1
+		}
 		// Any checked categories must be displayed to allow the user to uncheck,
 		// even if there are 0 users.
 		Object.keys(checkedBoxes).forEach((item, idx) => {
@@ -39,8 +53,14 @@ const FeatureFilter = ({
 					[null, 'N/A', '', 'null'].indexOf(item[field]) == -1
 				) {
 					let v = item[field]
-					if (v in c) c[v]++
-					else c[v] = 1
+					if (isList) {
+						const parts = v.split(', ')
+						parts.forEach((val) => {
+							updateHash(truncateAt(val, ' ('))
+						})
+					} else {
+						updateHash(v)
+					}
 				}
 			})
 
@@ -56,6 +76,12 @@ const FeatureFilter = ({
 			...checkedBoxes,
 			[e.currentTarget.name]: e.currentTarget.checked
 		})
+	}
+
+	const selectOnly = (val) => {
+		const cb = {}
+		cb[val] = true
+		setCheckedBoxes(cb)
 	}
 
 	const makeCheckbox = (val, idx, counts) => {
@@ -75,21 +101,26 @@ const FeatureFilter = ({
 
 		return (
 			<div key={idx}>
-				<label title={val} style={{ color: color }}>
-					<input
-						type='checkbox'
-						onChange={checkboxClicked}
-						name={val}
-						checked={val in checkedBoxes && checkedBoxes[val]}
-					/>
+				<input
+					type='checkbox'
+					onChange={checkboxClicked}
+					name={val}
+					checked={val in checkedBoxes && checkedBoxes[val]}
+				/>
+				<span
+					className={styles.checkbox_labelish}
+					title={val}
+					style={{ color: color }}
+					onClick={(e) => selectOnly(val)}
+				>
 					{short} {count}
-				</label>
+				</span>
 			</div>
 		)
 	}
 
 	useEffect(() => {
-		// Create an array with just the selected values.
+		// Create an array with just the selected categories.
 		let checkedCategories = []
 		Object.keys(checkedBoxes).forEach((val) => {
 			if (checkedBoxes[val]) checkedCategories.push(val)
@@ -97,10 +128,17 @@ const FeatureFilter = ({
 
 		// Generate the mask.
 		const filterMask = originalArray.map((record, idx) => {
-			return (
-				checkedCategories.length === 0 ||
-				checkedCategories.includes(record[field])
-			)
+			if (checkedCategories.length === 0) return true
+
+			if (isList) {
+				const parts = record[field].split(', ')
+				let guess = false
+				parts.forEach((val) => {
+					const v = truncateAt(val, ' (')
+					if (checkedCategories.includes(v)) guess = true
+				})
+				return guess
+			} else return checkedCategories.includes(record[field])
 		})
 
 		// console.log('useEffect', checkedCategories, originalArray, filterMask)

@@ -78,6 +78,7 @@ const FilterPanel = ({
 				order={sortOrder}
 				callback={(data) => aggregateMasks(idx, data)}
 				mergedMasks={mergedMasks[idx]}
+				isList={val.isList}
 				key={idx}
 			/>
 		)

@@ -173,3 +173,7 @@
 	width: 100px;
 	padding: 7px;
 }
+
+.checkbox_labelish {
+	cursor: pointer;
+}
