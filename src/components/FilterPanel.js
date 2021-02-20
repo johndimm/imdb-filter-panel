@@ -8,7 +8,8 @@ const FilterPanel = ({
 	callback,
 	query,
 	filterDef,
-	searchFields
+	searchFields,
+	debug
 }) => {
 	const [sourceMasks, setSourceMasks] = useState([])
 	const [mergedMasks, setMergedMasks] = useState([])
@@ -70,17 +71,34 @@ const FilterPanel = ({
 	const filters = filterDef.map((val, idx) => {
 		const sortOrder = 'order' in val ? val.order : 'frequency'
 
+		const debugMasks = debug ? (
+			<div>
+				in:{' '}
+				{JSON.stringify(mergedMasks[idx])
+					.replace(/true/g, '1')
+					.replace(/false/g, '0')}
+				<br />
+				out:{' '}
+				{JSON.stringify(sourceMasks[idx])
+					.replace(/true/g, '1')
+					.replace(/false/g, '0')}
+			</div>
+		) : null
+
 		return (
-			<FeatureFilter
-				title={val.title}
-				originalArray={originalArray}
-				field={val.field}
-				order={sortOrder}
-				callback={(data) => aggregateMasks(idx, data)}
-				mergedMasks={mergedMasks[idx]}
-				isList={val.isList}
-				key={idx}
-			/>
+			<div>
+				<FeatureFilter
+					title={val.title}
+					originalArray={originalArray}
+					field={val.field}
+					order={sortOrder}
+					callback={(data) => aggregateMasks(idx, data)}
+					mergedMasks={mergedMasks[idx]}
+					isList={val.isList}
+					key={idx}
+				/>
+				{debugMasks}
+			</div>
 		)
 	})
 

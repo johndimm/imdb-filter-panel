@@ -164,7 +164,7 @@ const Movies = () => {
 			<Head>
 				<meta
 					name='viewport'
-					content='width=device-width, initial-scale=.5, maximum-scale=12.0, minimum-scale=.25, user-scalable=yes'
+					content='width=device-width, initial-scale=.5, maximum-scale=10.0, minimum-scale=.25, user-scalable=yes'
 				/>
 			</Head>
 			<div
