@@ -110,6 +110,10 @@
 	max-height: 450px;
 }
 
+.one_movie a {
+	margin-left: 20px;
+}
+
 .one_movie_title {
 	font-size: 22pt;
 	margin-top: 10px;
@@ -193,4 +197,11 @@
 
 .checkbox_labelish {
 	cursor: pointer;
+}
+
+.debug {
+	font-size: 10pt;
+	border: 1px solid black;
+	margin: 10px;
+	padding: 3px;
 }

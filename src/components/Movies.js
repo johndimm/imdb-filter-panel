@@ -38,7 +38,9 @@ const detailFields = [
 	'production',
 	'country',
 	'language',
-	'awards'
+	'awards',
+	'boxoffice',
+	'dvd'
 ]
 
 const OneMovie = ({ movie, setOneMovie, setQuery }) => {
@@ -75,8 +77,15 @@ const OneMovie = ({ movie, setOneMovie, setQuery }) => {
 				<div className={styles.one_movie_title}>{movie.title}</div>
 				<div>{movie.plot}</div>
 				<div className={styles.movie_details}>{detail}</div>
+				<b>Links:</b>
 				<a target='_new' href={'//imdb.com/title/' + movie.imdbid}>
 					IMDB
+				</a>
+				<a target='_new' href={movie.tomatourl}>
+					Rotten Tomatoes
+				</a>
+				<a target='_new' href={movie.website}>
+					Website
 				</a>
 			</div>
 		</div>

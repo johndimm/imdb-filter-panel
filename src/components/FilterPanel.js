@@ -73,7 +73,7 @@ const FilterPanel = ({
 
 		const debugMasks =
 			idx in mergedMasks && idx in sourceMasks && debug ? (
-				<div>
+				<div className={styles.debug}>
 					in:{' '}
 					{JSON.stringify(mergedMasks[idx])
 						.replace(/true/g, '1')
