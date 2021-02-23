@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import FilterPanel from './FilterPanel'
 import styles from './Movies.module.css'
 import Head from 'next/head'
+import { delBasePath } from 'next/dist/next-server/lib/router/router'
 
 const MOVIES_PER_PAGE = 30
 
@@ -72,7 +73,7 @@ const OneMovie = ({ movie, setOneMovie, setQuery }) => {
 	return (
 		<div className={styles.popup_background} onClick={(e) => setOneMovie(null)}>
 			<div className={styles.one_movie}>
-				<img src={movie.poster} onError={onError} onLoad={onLoad} />
+				<img src={movie.poster} onError={ (e) => onError(e, movie)} onLoad={onLoad} />
 
 				<div className={styles.one_movie_title}>{movie.title}</div>
 				<div>{movie.plot}</div>
@@ -99,11 +100,36 @@ const onLoad = (e) => {
 	e.preventDefault()
 }
 
-const onError = (e) => {
+const updatePoster = async (movie, posterURL) => {
+  console.log ("updatePoster", movie, posterURL)
+  if (movie.imdbid == null || posterURL == null)
+    return
+
+  const url = `/api/movies/poster/update/${movie.imdbid}/${encodeURIComponent(posterURL)}`
+  const response = await fetch(url)
+  const data = await response.json()
+  console.log("updated the poster", data.imdbid, data.posterURL)
+}
+
+const fetchOMDBPoster = async (e, movie) => {
+	console.log('Bad poster for ', movie)
+    const url = `http://www.omdbapi.com/?i=${movie.imdbid}&apikey=985c8d27`
+    const response = await fetch(url)
+	const data = await response.json()
+	updatePoster(movie, data.Poster)
+
+	// Set the source of the current movie poster that generated the request.
+	e.target.src= data.Poster
+}
+
+const onError = (e, movie) => {
 	// Turn display off, because this may be a bad image link.
 	// But it could also something innocuous that actually
 	// doesn't prevent the image from displaying.
 	e.currentTarget.style.display = 'none'
+
+	fetchOMDBPoster(e, movie)
+
 	e.preventDefault()
 	e.target.onerror = null
 }
@@ -114,7 +140,7 @@ const Card = ({ movie, onClick }) => {
 			<div className={styles.movie_title}>{movie.title}</div>
 			<div className={styles.movie_plot}>{movie.plot}</div>
 			<div>
-				<img src={movie.poster} onError={onError} onLoad={onLoad} />
+				<img src={movie.poster} onError={ (e) => onError(e, movie)} onLoad={onLoad} />
 			</div>
 		</div>
 	)

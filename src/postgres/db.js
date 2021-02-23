@@ -23,3 +23,9 @@ exports.getMovies = function () {
 exports.getExamples = function () {
 	return performSQLQuery(`select * from example;`)
 }
+
+exports.updatePoster = function (imdbid, posterURL) {
+	return performSQLQuery(
+		`update movies set poster='${posterURL}' where imdbid='${imdbid}';`
+	)
+}

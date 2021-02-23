@@ -5,7 +5,7 @@ import Head from 'next/head'
 
 const MOVIES_PER_PAGE = 30
 
-const filterDef = [
+const filterFields = [
 	{ title: 'Size', field: 'size' },
 	{ title: 'Color', field: 'color' },
 	{ title: 'Shape', field: 'shape' }
@@ -114,7 +114,7 @@ const Example = () => {
 					callback={setFilteredData}
 					className={styles.filter_panel}
 					query={query}
-					filterDef={filterDef}
+					filterFields={filterFields}
 					searchFields={searchFields}
 					debug={true}
 				/>

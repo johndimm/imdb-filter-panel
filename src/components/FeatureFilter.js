@@ -84,6 +84,21 @@ const FeatureFilter = ({
 		setCheckedBoxes(cb)
 	}
 
+	const sortCategories = (order, a, b, countsa, countsb) => {
+		if (order === 'frequency') {
+		   // Major sort by counts, minor by alpha.
+		   if (countsb != countsa)
+             return countsb - countsa
+		}
+
+		var nameA=a.toLowerCase(), nameB=b.toLowerCase();
+		if (nameA < nameB) //sort string ascending
+			return -1;
+		if (nameA > nameB)
+			return 1;
+		return 0;
+	}
+
 	const makeCheckbox = (val, idx, counts) => {
 		let short = shorten(val, MAXCHAR_CATEGORY)
 
@@ -159,7 +174,7 @@ const FeatureFilter = ({
 
 	let UI = Object.keys(counts)
 		.sort((a, b) => {
-			return order && order === 'alpha' ? b > a : counts[b] - counts[a]
+            return sortCategories(order, a, b, counts[a], counts[b])
 		})
 		.map((val, idx) => {
 			return makeCheckbox(val, idx, counts)
