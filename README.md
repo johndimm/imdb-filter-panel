@@ -1,34 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+The code uses document masks, which are simple arrays of boolean values, one for each "document" in the database (user, movie, geometric object).  An entry is True if that item should be displayed according to this filter.  This makes it easy for the filters to work independently, but still react to changes in the states of other filters.
 
-## Getting Started
+Each feature filter manages a single column of the table.  When the user clicks on a checkbox, it calculates the output mask over all records in the original array.  
 
-First, run the development server:
+```jsx
+// Generate the output mask.
+		const outputMask = originalArray.map((record, idx) => {
+			// If nothing is checked, it's as if everything were checked.
+			if (checkedCategories.length === 0) return true
 
-```bash
-npm run dev
-# or
-yarn dev
+			if (isList) {
+				return checkList(record[field])
+			} else {
+				return checkedCategories.includes(record[field])
+			}
+		})
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Using a callback, the output mask is sent up to the Filter Panel, where it is aggregated with the output masks from the other Feature Filters to update the list of input masks.  The input masks are sent down to the corresponding Feature Filter as a state parameter.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```jsx
+outputMasks[sourceIdx] = outputMask
+		setoutputMasks(outputMasks)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+		// Make a mask for each filter that merges all the other filter masks.
+		const inputMasks = outputMasks.map((outputMask, filterIdx) => {
+			return outputMask.map((val, idx) => {
+				let allTrue = true
+				for (var i = 0; i < outputMasks.length; i++) {
+					if (i != filterIdx && !outputMasks[i][idx]) {
+						allTrue = false
+						break
+					}
+				}
+				return allTrue
+			})
+		})
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+		setinputMasks(inputMasks)
+```
 
-## Learn More
+It is important to avoid causing an update to the filter that caused the change in state for two reasons:  1) to avoid an infinite update loop and 2) because we want the originating filter to remain in place.  Otherwise, the originating filter would be reduced to a single line.
 
-To learn more about Next.js, take a look at the following resources:
+The goals of this approach:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- each filter shows the current counts based on user selections in other filters
+- every link produces data, there are no dead links
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+The Galigo Filter Panel also includes Search, using a wrapper.
 
-## Deploy on Vercel
+The flow:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- user clicks on a checkbox
+- FeatureFilter calculates output mask
+    - each filter does a pass through the database
+- sends it to FilterPanel using callback
+- FilterPanel receives output masks from all filters
+- computes input mask for each filter
+    - the intersection of all other output masks
+        - not including the filter itself
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- sends updated input masks down to each filter
+- filters recompute their local counts over their own items
