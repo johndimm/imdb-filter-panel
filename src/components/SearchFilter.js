@@ -57,8 +57,6 @@ const SearchFilter = ({
 
 	const noOp = (e) => e.preventDefault()
 
-	// console.log('SearchFilter, query:', queryString)
-
 	return (
 		<div className={styles.feature_filter}>
 			<h3>{title}</h3>
@@ -67,7 +65,6 @@ const SearchFilter = ({
 					type='text'
 					name='query'
 					onChange={onChange}
-					placeholder='search all movie info'
 					value={queryString}
 				/>
 				<span className={styles.clear_search} onClick={clearSearch}>

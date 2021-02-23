@@ -5,7 +5,7 @@ import Head from 'next/head'
 
 const MOVIES_PER_PAGE = 30
 
-const filterDef = [
+const filterFields = [
 	{ title: 'Genre', field: 'genre', isList: true },
 	{ title: 'Awards and Nominations', field: 'big_award' },
 	{ title: 'Country', field: 'country', isList: true },
@@ -186,9 +186,8 @@ const Movies = () => {
 				<FilterPanel
 					originalArray={data}
 					callback={setFilteredData}
-					className={styles.filter_panel}
 					query={query}
-					filterDef={filterDef}
+					filterFields={filterFields}
 					searchFields={searchFields}
 				/>
 				<div id='app' className={styles.movie_cards}>

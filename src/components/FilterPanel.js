@@ -7,12 +7,12 @@ const FilterPanel = ({
 	originalArray,
 	callback,
 	query,
-	filterDef,
+	filterFields,
 	searchFields,
 	debug
 }) => {
-	const [sourceMasks, setSourceMasks] = useState([])
-	const [mergedMasks, setMergedMasks] = useState([])
+	const [outputMasks, setoutputMasks] = useState([])
+	const [inputMasks, setinputMasks] = useState([])
 
 	useEffect(() => {
 		// Load the arrays with "true", so everything is by default on.
@@ -21,22 +21,22 @@ const FilterPanel = ({
 		})
 
 		let ms = []
-		for (var i = 0; i < filterDef.length + 1; i++) ms.push(m)
+		for (var i = 0; i < filterFields.length + 1; i++) ms.push(m)
 
-		setSourceMasks(ms)
-		setMergedMasks(ms)
+		setoutputMasks(ms)
+		setinputMasks(ms)
 	}, [originalArray])
 
-	const aggregateMasks = (sourceIdx, filterMask) => {
-		sourceMasks[sourceIdx] = filterMask
-		setSourceMasks(sourceMasks)
+	const aggregateMasks = (sourceIdx, outputMask) => {
+		outputMasks[sourceIdx] = outputMask
+		setoutputMasks(outputMasks)
 
 		// Make a mask for each filter that merges all the other filter masks.
-		const mergedMasks = sourceMasks.map((sourceMask, idxSM) => {
-			return sourceMask.map((val, idx) => {
+		const inputMasks = outputMasks.map((outputMask, filterIdx) => {
+			return outputMask.map((val, idx) => {
 				let allTrue = true
-				for (var i = 0; i < sourceMasks.length; i++) {
-					if (i != idxSM && !sourceMasks[i][idx]) {
+				for (var i = 0; i < outputMasks.length; i++) {
+					if (i != filterIdx && !outputMasks[i][idx]) {
 						allTrue = false
 						break
 					}
@@ -45,13 +45,15 @@ const FilterPanel = ({
 			})
 		})
 
-		setMergedMasks(mergedMasks)
+		setinputMasks(inputMasks)
 
+		// Send results to parent.
+		// First, make a mask over all feature filters.
 		let globalMask = []
-		filterMask.forEach((val, idx) => {
+		outputMask.forEach((val, idx) => {
 			let allTrue = val
-			for (var i = 0; i < sourceMasks.length; i++) {
-				if (!sourceMasks[i][idx]) {
+			for (var i = 0; i < outputMasks.length; i++) {
+				if (!outputMasks[i][idx]) {
 					allTrue = false
 					break
 				}
@@ -59,7 +61,7 @@ const FilterPanel = ({
 			globalMask.push(allTrue)
 		})
 
-		// Send results to parent.
+		// Second, gather the original records using the global mask.
 		let filteredData = []
 		globalMask.forEach((val, idx) => {
 			if (val) filteredData.push(originalArray[idx])
@@ -68,19 +70,19 @@ const FilterPanel = ({
 		callback(filteredData)
 	}
 
-	const filters = filterDef.map((val, idx) => {
+	const filters = filterFields.map((val, idx) => {
 		const sortOrder = 'order' in val ? val.order : 'frequency'
 
 		const debugMasks =
-			idx in mergedMasks && idx in sourceMasks && debug ? (
+			idx in inputMasks && idx in outputMasks && debug ? (
 				<div className={styles.debug}>
 					in:{' '}
-					{JSON.stringify(mergedMasks[idx])
+					{JSON.stringify(inputMasks[idx])
 						.replace(/true/g, '1')
 						.replace(/false/g, '0')}
 					<br />
 					out:{' '}
-					{JSON.stringify(sourceMasks[idx])
+					{JSON.stringify(outputMasks[idx])
 						.replace(/true/g, '1')
 						.replace(/false/g, '0')}
 				</div>
@@ -94,7 +96,7 @@ const FilterPanel = ({
 					field={val.field}
 					order={sortOrder}
 					callback={(data) => aggregateMasks(idx, data)}
-					mergedMasks={mergedMasks[idx]}
+					inputMasks={inputMasks[idx]}
 					isList={val.isList}
 				/>
 				{debugMasks}
@@ -102,7 +104,7 @@ const FilterPanel = ({
 		)
 	})
 
-	const idx = filterDef.length
+	const idx = filterFields.length
 
 	// console.log('FilterPanel, query', query)
 
@@ -112,7 +114,7 @@ const FilterPanel = ({
 				title='Search'
 				originalArray={originalArray}
 				callback={(data) => aggregateMasks(idx, data)}
-				mergedMasks={mergedMasks[idx]}
+				inputMasks={inputMasks[idx]}
 				query={query}
 				searchFields={searchFields}
 			/>

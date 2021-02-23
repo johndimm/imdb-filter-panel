@@ -16,7 +16,7 @@ const FeatureFilter = ({
 	originalArray,
 	field,
 	callback,
-	mergedMasks,
+	inputMasks,
 	order,
 	isList
 }) => {
@@ -46,7 +46,7 @@ const FeatureFilter = ({
 		})
 
 		originalArray
-			.filter((e, idx) => mergedMasks.length === 0 || mergedMasks[idx])
+			.filter((e, idx) => inputMasks.length === 0 || inputMasks[idx])
 			.forEach((item, idx) => {
 				if (
 					field in item &&
@@ -126,25 +126,32 @@ const FeatureFilter = ({
 			if (checkedBoxes[val]) checkedCategories.push(val)
 		})
 
-		// Generate the mask.
-		const filterMask = originalArray.map((record, idx) => {
+		const checkList = (val) => {
+			const parts = val.split(', ')
+			let guess = false
+			parts.forEach((val) => {
+				const v = truncateAt(val, ' (')
+				if (checkedCategories.includes(v)) guess = true
+			})
+			return guess
+		}
+
+		// Generate the output mask.
+		const outputMask = originalArray.map((record, idx) => {
+			// If nothing is checked, it's as if everything were checked.
 			if (checkedCategories.length === 0) return true
 
 			if (isList) {
-				const parts = record[field].split(', ')
-				let guess = false
-				parts.forEach((val) => {
-					const v = truncateAt(val, ' (')
-					if (checkedCategories.includes(v)) guess = true
-				})
-				return guess
-			} else return checkedCategories.includes(record[field])
+				return checkList(record[field])
+			} else {
+				return checkedCategories.includes(record[field])
+			}
 		})
 
-		// console.log('useEffect', checkedCategories, originalArray, filterMask)
+		// console.log('useEffect', checkedCategories, originalArray, outputMask)
 
 		// Send to parent.
-		callback(filterMask)
+		callback(outputMask)
 	}, [checkedBoxes])
 
 	let numPopulated = 0
