@@ -1,11 +1,17 @@
 
 (<img src=(https://raw.githubusercontent.com/johndimm/imdb-filter-panel/main/public/movies.png) />)
 
+![screenshot](https://raw.githubusercontent.com/johndimm/imdb-filter-panel/main/public/movies.png)
+
 [5273 Movies](http://54.169.121.112:3001/)
 
-https://docs.google.com/spreadsheets/d/1Kt0em3UqSSLBC186MyPs1Y3g8w_PqGNEGWiTIpRD7Lc/edit?usp=sharing
+This repo is about the React code that manages the filter panel on the left in this app.  Similar widgets are used by Amazon, Walmart, and many other sites.  The interface is a powerful way to reduce search results.  
 
+A toy example makes it easier to see what's going on.
 
+![](https://github.com/johndimm/imdb-filter-panel/blob/main/public/example.png?raw=true)
+
+[toy example](http://54.169.121.112:3001/example)
 
 The code uses document masks, which are simple arrays of boolean values, one for each "document" in the database (user, movie, geometric object).  An entry is True if that item should be displayed according to this filter.  This makes it easy for the filters to work independently, but still react to changes in the states of other filters.
 
