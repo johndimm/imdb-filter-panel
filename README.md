@@ -83,14 +83,17 @@ Using a callback, the output mask is sent up to the Filter Panel, where it is ag
 		setinputMasks(inputMasks)
 ```
 
-It is important to avoid causing an update to the filter that caused the change in state for two reasons:  1) to avoid an infinite update loop and 2) because we want the originating filter to remain in place.  Otherwise, the originating filter would be reduced to a single line.
+It is important to avoid causing an update to the filter that caused the change in state for two reasons:  
+
+- to avoid an infinite update loop and 
+- because we want the originating filter to remain in place.  
+
+Otherwise, the originating filter would be reduced to a single line.
 
 ## The goals of this approach:
 
 - each filter shows the current counts based on user selections in other filters
 - every link produces data, there are no dead links
-
-The Galigo Filter Panel also includes Search, using a wrapper.
 
 ## The flow:
 
