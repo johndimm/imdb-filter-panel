@@ -73,6 +73,9 @@ The flow:
 - sends updated input masks down to each filter
 - filters recompute their local counts over their own items
 
-Improvements:
 
-- The document masks could be literal bitmasks, in which case the code to calculate the intersection of output masks is just a bitwise AND.
+Next steps:
+
+- The document masks could be implemented as bitmasks, in which case the code to calculate the intersection of output masks is just a bitwise AND.  This would be a better approach, but I'm not sure it would produce a noticeable improvement on 5,000 items.
+
+- Handle larger datasets by using the database to create document masks and match them to the data.  I would expect this to be less snappy but still have good performance.
