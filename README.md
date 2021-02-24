@@ -30,7 +30,7 @@ Each feature filter manages a single column of the table.  When the user clicks 
 Using a callback, the output mask is sent up to the Filter Panel, where it is aggregated with the output masks from the other Feature Filters to update the list of input masks.  The input masks are sent down to the corresponding Feature Filter as a state parameter.
 
 ```jsx
-outputMasks[sourceIdx] = outputMask
+                outputMasks[sourceIdx] = outputMask
 		setoutputMasks(outputMasks)
 
 		// Make a mask for each filter that merges all the other filter masks.
@@ -72,3 +72,7 @@ The flow:
 
 - sends updated input masks down to each filter
 - filters recompute their local counts over their own items
+
+Improvements:
+
+- The document masks could be literal bitmasks, in which case the code to calculate the intersection of output masks is just a bitwise AND.
