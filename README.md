@@ -2,10 +2,43 @@
 
 This repo is about the React code that manages the filter panel on the left in this app.  Similar widgets are used by Amazon, Walmart, and many other sites.  The interface is a powerful way to reduce search results.  
 
+## Installation
+
+Requires:
+
+- node
+- postgres
+- react
+- nextjs
+
+Steps:
+
+- clone the repo
+- npm install
+- source .env
+- npm run dev
+
+## Environment
+
+The .env file is included here because this is the default postgres setup for local access to a database running on the same machine as the React app.
+
+```
+$ cat .env
+export PGUSER=postgres
+export PGHOST=localhost
+export PGPASSWORD=postgres
+export PGDATABASE=movies
+export PGPORT=5432
+```
+
+## Toy Example
+
 A toy example makes it easier to see what's going on.
 
 [![toy example](https://github.com/johndimm/imdb-filter-panel/blob/main/public/example.png?raw=true)](http://54.169.121.112:3001/example)
 
+
+## About the code
 
 ![](https://github.com/johndimm/imdb-filter-panel/blob/main/public/diagram.png?raw=true)
 
@@ -52,14 +85,14 @@ Using a callback, the output mask is sent up to the Filter Panel, where it is ag
 
 It is important to avoid causing an update to the filter that caused the change in state for two reasons:  1) to avoid an infinite update loop and 2) because we want the originating filter to remain in place.  Otherwise, the originating filter would be reduced to a single line.
 
-The goals of this approach:
+## The goals of this approach:
 
 - each filter shows the current counts based on user selections in other filters
 - every link produces data, there are no dead links
 
 The Galigo Filter Panel also includes Search, using a wrapper.
 
-The flow:
+## The flow:
 
 - user clicks on a checkbox
 - FeatureFilter calculates output mask
@@ -74,7 +107,7 @@ The flow:
 - filters recompute their local counts over their own items
 
 
-Next steps:
+## Next steps:
 
 - The document masks could be implemented as bitmasks, in which case the code to calculate the intersection of output masks is just a bitwise AND.  This would be a better approach, but I'm not sure it would produce a noticeable improvement on 5,000 items.
 
