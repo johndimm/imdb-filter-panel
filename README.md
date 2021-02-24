@@ -6,6 +6,9 @@ A toy example makes it easier to see what's going on.
 
 [![toy example](https://github.com/johndimm/imdb-filter-panel/blob/main/public/example.png?raw=true)](http://54.169.121.112:3001/example)
 
+
+![](https://github.com/johndimm/imdb-filter-panel/blob/main/public/diagram.png?raw=true)
+
 The code uses document masks, which are simple arrays of boolean values, one for each "document" in the database (user, movie, geometric object).  An entry is True if that item should be displayed according to this filter.  This makes it easy for the filters to work independently, but still react to changes in the states of other filters.
 
 Each feature filter manages a single column of the table.  When the user clicks on a checkbox, it calculates the output mask over all records in the original array.  
