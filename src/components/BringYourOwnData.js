@@ -298,7 +298,6 @@ const BYOD = () => {
 						const f = document.getElementById("fileForm")
 						uploadFile(f.elements['files'].files[0])
 						}}/>
-                    <input id="submit" type="submit" />
                 </form>
 			
             	<FilterPanel
