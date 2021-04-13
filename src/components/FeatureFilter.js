@@ -46,7 +46,7 @@ const FeatureFilter = ({
 		})
 
 		originalArray
-			.filter((e, idx) => inputMasks.length === 0 || inputMasks[idx])
+			.filter((e, idx) => !inputMasks || inputMasks.length === 0 || inputMasks[idx])
 			.forEach((item, idx) => {
 				if (
 					field in item &&
