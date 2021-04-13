@@ -38,6 +38,8 @@
 	margin-bottom: 100px;
 }
 
+
+
 .movie_card {
 	float: left;
 	position: relative;
@@ -46,9 +48,18 @@
 	background-color: lightgray;
 	text-align: center;
 	border: 1px solid lightgray;
-	height: 320px;
-	width: 225px;
+	height: calc(var(--factor) * 320px);
+	width: calc(var(--factor) * 225px);
+	overflow: hidden;
 	cursor: pointer;
+}
+
+.movie_card img {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	height: calc(var(--factor) * 310px);
+	width: calc(var(--factor) * 215px);
 }
 
 .example_card {
@@ -67,13 +78,7 @@
 	width: 100%;
 }
 
-.movie_card img {
-	position: absolute;
-	top: 5px;
-	left: 5px;
-	max-height: 310px;
-	max-width: 215px;
-}
+
 
 .movie_title {
 	font-size: 12pt;
@@ -86,7 +91,6 @@
 }
 .movie_cards {
 	width: auto;
-	overflow: hidden;
 }
 .movie_count {
 	font-size: 9pt;
