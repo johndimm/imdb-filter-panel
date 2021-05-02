@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react'
 import styles from './Movies.module.css'
 
 const DEFAULT_NUM_USERS = 11
@@ -11,7 +11,7 @@ function shorten(str, maxLen, separator = ' ') {
 	return str.substr(0, str.lastIndexOf(separator, maxLen)) + ' . . .'
 }
 
-const FeatureFilter = ({
+const FeatureFilter = forwardRef( ({
 	title,
 	originalArray,
 	field,
@@ -19,9 +19,17 @@ const FeatureFilter = ({
 	inputMasks,
 	order,
 	isList
-}) => {
+}, ref) => {
 	const [checkedBoxes, setCheckedBoxes] = useState({})
 	const [showAll, setShowAll] = useState(false)
+
+    useImperativeHandle(ref, () => ({
+		clear () {
+			setCheckedBoxes({})
+			setShowAll(false)
+		}
+    }))
+
 
 	const truncateAt = (s, c) => {
 		let v = s
@@ -215,5 +223,6 @@ const FeatureFilter = ({
 		</div>
 	)
 }
+)
 
 export default FeatureFilter

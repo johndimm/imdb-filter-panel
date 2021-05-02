@@ -7,43 +7,6 @@ import csv from 'csvtojson'
 
 const MOVIES_PER_PAGE = 30
 
-let filterFields_v0 = [
-	{ title: 'Genre', field: 'Genre', isList: true },
-	{ title: 'Country', field: 'Country', isList: true },
-	{ title: 'Language', field: 'Language', isList: true },
-	{ title: 'Content Rating', field: 'Rated' },
-	{ title: 'IMDB Rating', field: 'Rating', order: 'alpha' },
-	{ title: 'Actor', field: 'Actors', isList: true },
-	{ title: 'Director', field: 'Director', isList: true },
-	{ title: 'Writer', field: 'Writer', isList: true },
-	{ title: 'Production', field: 'Production', isList: true },
-	{ title: 'Decade', field: 'Decade', order: 'alpha' },
-	{ title: 'Year', field: 'Year', order: 'alpha' }
-]
-
-const searchFields_v0 = [
-	'Title',
-	'Plot',
-	'Actors',
-	'Writer',
-	'Director',
-	'Production'
-]
-
-const detailFields_v0 = [
-	'Genre',
-	'Released',
-	'Actors',
-	'Director',
-	'Writer',
-	'Production',
-	'Country',
-	'Language',
-	'Awards',
-	'BoxOffice',
-	'DVD'
-]
-
 const OneMovie = ({ movie, setOneMovie, setQuery }) => {
 	const detail = Object.keys(movie).map((s, idx) => {
 		const name = s.charAt(0).toUpperCase() + s.slice(1)

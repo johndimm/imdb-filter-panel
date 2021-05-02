@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, createRef, useRef, useCallback } from 'react'
 import styles from './Movies.module.css'
 import FeatureFilter from './FeatureFilter'
 import SearchFilter from './SearchFilter'
@@ -13,6 +13,7 @@ const FilterPanel = ({
 }) => {
 	const [outputMasks, setoutputMasks] = useState([])
 	const [inputMasks, setinputMasks] = useState([])
+	const refs = filterFields.map( (val) => useRef(null))
 
 	useEffect(() => {
 		// Load the arrays with "true", so everything is by default on.
@@ -21,7 +22,7 @@ const FilterPanel = ({
 		})
 
 		let ms = []
-		for (var i = 0; i < filterFields.length + 1; i++) ms.push(m)
+		for (let i = 0; i < filterFields.length + 1; i++) ms.push(m)
 
 		setoutputMasks(ms)
 		setinputMasks(ms)
@@ -70,6 +71,16 @@ const FilterPanel = ({
 		callback(filteredData)
 	}
 
+	const clearInterface = (e) => {
+		e.preventDefault()
+		console.log('clearInterface')
+		setoutputMasks([])
+		setinputMasks([])
+		refs.forEach ( (ref) => {
+			ref.current.clear()
+		})
+	}
+
 	const filters = filterFields.map((val, idx) => {
 		const sortOrder = 'order' in val ? val.order : 'frequency'
 
@@ -88,10 +99,12 @@ const FilterPanel = ({
 				</div>
 			) : null
 
+
 		return (
 			<div key={idx}>
 				<FeatureFilter
 					title={val.title}
+					ref={refs[idx]}
 					originalArray={originalArray}
 					field={val.field}
 					order={sortOrder}
@@ -110,6 +123,7 @@ const FilterPanel = ({
 
 	return (
 		<div className={styles.filter_panel}>
+			<div className={styles.clear_interface} onClick={clearInterface}>clear</div>
 			<SearchFilter
 				title='Search'
 				originalArray={originalArray}
