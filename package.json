@@ -8,9 +8,13 @@
     "start": "next start -p 3001"
   },
   "dependencies": {
+    "csv-string": "^4.0.1",
     "csvtojson": "^2.0.10",
     "express": "^4.17.1",
+    "fast-csv": "^4.3.6",
+    "fs": "^0.0.1-security",
     "next": "10.0.6",
+    "papaparse": "^5.3.1",
     "pg": "^8.5.1",
     "react": "17.0.1",
     "react-dom": "17.0.1"

@@ -11,9 +11,9 @@ const FilterPanel = ({
 	searchFields,
 	debug
 }) => {
+	const [refs, setRefs] = useState([])
 	const [outputMasks, setoutputMasks] = useState([])
 	const [inputMasks, setinputMasks] = useState([])
-	const refs = filterFields.map( (val) => useRef(null))
 
 	useEffect(() => {
 		// Load the arrays with "true", so everything is by default on.
@@ -26,7 +26,10 @@ const FilterPanel = ({
 
 		setoutputMasks(ms)
 		setinputMasks(ms)
-	}, [originalArray])
+
+		setRefs(Array(filterFields.length).fill().map((_, i) => refs[i] || createRef()))
+
+	}, [originalArray, filterFields])
 
 	const aggregateMasks = (sourceIdx, outputMask) => {
 		outputMasks[sourceIdx] = outputMask

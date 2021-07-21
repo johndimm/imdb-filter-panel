@@ -38,28 +38,39 @@
 	margin-bottom: 100px;
 }
 
-
-
 .movie_card {
 	float: left;
 	position: relative;
 	margin: 10px;
 	padding: 10px;
 	background-color: lightgray;
-	text-align: center;
+	text-align: left;
 	border: 1px solid lightgray;
 	height: calc(var(--factor) * 320px);
 	width: calc(var(--factor) * 225px);
 	overflow: hidden;
 	cursor: pointer;
+	font-size: 9pt;
 }
+
+/*
+.movie_card img {
+	float: right;
+	top: 5px;
+	left: 5px;
+	width: 50%;
+	overflow: hidden;
+}
+	width: calc(var(--factor) * 210px);
+*/
 
 .movie_card img {
 	position: absolute;
+	height: calc(var(--factor) * 310px);
+
 	top: 5px;
 	left: 5px;
-	height: calc(var(--factor) * 310px);
-	width: calc(var(--factor) * 215px);
+	overflow: hidden;
 }
 
 .example_card {
@@ -77,8 +88,6 @@
 	bottom: 20px;
 	width: 100%;
 }
-
-
 
 .movie_title {
 	font-size: 12pt;
@@ -110,6 +119,7 @@
 
 .one_movie img {
 	float: left;
+	margin-bottom: 200px;
 	margin-right: 20px;
 	max-height: 450px;
 }
@@ -125,7 +135,7 @@
 }
 
 .movie_details {
-	margin-top: 20px;
+	margin-top: 0px;
 	margin-bottom: 10px;
 	font-size: 10pt;
 }
@@ -211,7 +221,7 @@
 }
 
 .clear_interface {
-    float: right;
+	float: right;
 	margin-top: 20px;
 	cursor: pointer;
 }

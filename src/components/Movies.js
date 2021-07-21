@@ -154,15 +154,6 @@ const Movies = () => {
 	const [query, setQuery] = useState('')
 	const [spinnerDisplay, setSpinnerDisplay] = useState('block')
 
-	const getData = async () => {
-		const url = '/api/movies/get/'
-		const response = await fetch(url)
-		const data = await response.json()
-		setData(data)
-		setFilteredData(data)
-		setSpinnerDisplay('none')
-	}
-
 	const isBottom = (el) => {
 		return el.scrollTop + el.clientHeight + 1 > el.scrollHeight
 	}
@@ -175,6 +166,15 @@ const Movies = () => {
 	}
 
 	useEffect(() => {
+		const getData = async () => {
+			const url = '/api/movies/get/'
+			const response = await fetch(url)
+			const data = await response.json()
+			setData(data)
+			setFilteredData(data)
+			setSpinnerDisplay('none')
+		}
+
 		getData()
 	}, [])
 

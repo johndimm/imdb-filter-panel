@@ -90,6 +90,31 @@
     "lodash" "^4.17.13"
     "to-fast-properties" "^2.0.0"
 
+"@fast-csv/format@4.3.5":
+  "integrity" "sha512-8iRn6QF3I8Ak78lNAa+Gdl5MJJBM5vRHivFtMRUWINdevNo00K7OXxS2PshawLKTejVwieIlPmK5YlLu6w4u8A=="
+  "resolved" "https://registry.npmjs.org/@fast-csv/format/-/format-4.3.5.tgz"
+  "version" "4.3.5"
+  dependencies:
+    "@types/node" "^14.0.1"
+    "lodash.escaperegexp" "^4.1.2"
+    "lodash.isboolean" "^3.0.3"
+    "lodash.isequal" "^4.5.0"
+    "lodash.isfunction" "^3.0.9"
+    "lodash.isnil" "^4.0.0"
+
+"@fast-csv/parse@4.3.6":
+  "integrity" "sha512-uRsLYksqpbDmWaSmzvJcuApSEe38+6NQZBUsuAyMZKqHxH0g1wcJgsKUvN3WC8tewaqFjBMMGrkHmC+T7k8LvA=="
+  "resolved" "https://registry.npmjs.org/@fast-csv/parse/-/parse-4.3.6.tgz"
+  "version" "4.3.6"
+  dependencies:
+    "@types/node" "^14.0.1"
+    "lodash.escaperegexp" "^4.1.2"
+    "lodash.groupby" "^4.6.0"
+    "lodash.isfunction" "^3.0.9"
+    "lodash.isnil" "^4.0.0"
+    "lodash.isundefined" "^3.0.1"
+    "lodash.uniq" "^4.5.0"
+
 "@hapi/accept@5.0.1":
   "integrity" "sha512-fMr4d7zLzsAXo28PRRQPXR1o2Wmu+6z+VY1UzDp0iFo13Twj8WePakwXBiqn3E1aAlTpSNzCXdnnQXFhst8h8Q=="
   "resolved" "https://registry.yarnpkg.com/@hapi/accept/-/accept-5.0.1.tgz"
@@ -153,6 +178,11 @@
   "integrity" "sha512-sDOAZcYwynHFTbLo6n8kIbLiVF3a3BLkrmehJUyEbT9F+Smbi47kLGS2gG2g0fjBLR/Lr1InPD7kXL7FaTqEkw=="
   "resolved" "https://registry.yarnpkg.com/@opentelemetry/context-base/-/context-base-0.14.0.tgz"
   "version" "0.14.0"
+
+"@types/node@^14.0.1":
+  "integrity" "sha512-bjqH2cX/O33jXT/UmReo2pM7DIJREPMnarixbQ57DOOzzFaI6D2+IcwaJQaJpv0M1E9TIhPCYVxrkcityLjlqA=="
+  "resolved" "https://registry.npmjs.org/@types/node/-/node-14.17.5.tgz"
+  "version" "14.17.5"
 
 "abort-controller@3.0.0":
   "integrity" "sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg=="
@@ -492,7 +522,6 @@
   dependencies:
     "anymatch" "~3.1.1"
     "braces" "~3.0.2"
-    "fsevents" "~2.3.1"
     "glob-parent" "~5.1.0"
     "is-binary-path" "~2.1.0"
     "is-glob" "~4.0.1"
@@ -719,6 +748,11 @@
   dependencies:
     "cssnano-preset-simple" "1.2.2"
     "postcss" "^7.0.32"
+
+"csv-string@^4.0.1":
+  "integrity" "sha512-nCdK+EWDbqLvZ2MmVQhHTmidMEsHbK3ncgTJb4oguNRpkmH5OOr+KkDRB4nqsVrJ7oK0AdO1QEsBp0+z7KBtGQ=="
+  "resolved" "https://registry.npmjs.org/csv-string/-/csv-string-4.0.1.tgz"
+  "version" "4.0.1"
 
 "csvtojson@^2.0.10":
   "integrity" "sha512-lUWFxGKyhraKCW8Qghz6Z0f2l/PqB1W3AO0HKJzGIQ5JRSlR651ekJDiGJbBT4sRNNv5ddnSGVEnsxP9XRCVpQ=="
@@ -993,6 +1027,14 @@
     "utils-merge" "1.0.1"
     "vary" "~1.1.2"
 
+"fast-csv@^4.3.6":
+  "integrity" "sha512-2RNSpuwwsJGP0frGsOmTb9oUF+VkFSM4SyLTDgwf2ciHWTarN0lQTC+F2f/t5J9QjW+c65VFIAAu85GsvMIusw=="
+  "resolved" "https://registry.npmjs.org/fast-csv/-/fast-csv-4.3.6.tgz"
+  "version" "4.3.6"
+  dependencies:
+    "@fast-csv/format" "4.3.5"
+    "@fast-csv/parse" "4.3.6"
+
 "fill-range@^7.0.1":
   "integrity" "sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ=="
   "resolved" "https://registry.yarnpkg.com/fill-range/-/fill-range-7.0.1.tgz"
@@ -1044,6 +1086,11 @@
   "integrity" "sha512-y6OAwoSIf7FyjMIv94u+b5rdheZEjzR63GTyZJm5qh4Bi+2YgwLCcI/fPFZkL5PSixOt6ZNKm+w+Hfp/Bciwow=="
   "resolved" "https://registry.yarnpkg.com/fs-constants/-/fs-constants-1.0.0.tgz"
   "version" "1.0.0"
+
+"fs@^0.0.1-security":
+  "integrity" "sha1-invTcYa23d84E/I4WLV+yq9eQdQ="
+  "resolved" "https://registry.npmjs.org/fs/-/fs-0.0.1-security.tgz"
+  "version" "0.0.1-security"
 
 "fsevents@~2.3.1":
   "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
@@ -1316,10 +1363,50 @@
   dependencies:
     "p-locate" "^4.1.0"
 
+"lodash.escaperegexp@^4.1.2":
+  "integrity" "sha1-ZHYsSGGAglGKw99Mz11YhtriA0c="
+  "resolved" "https://registry.npmjs.org/lodash.escaperegexp/-/lodash.escaperegexp-4.1.2.tgz"
+  "version" "4.1.2"
+
+"lodash.groupby@^4.6.0":
+  "integrity" "sha1-Cwih3PaDl8OXhVwyOXg4Mt90A9E="
+  "resolved" "https://registry.npmjs.org/lodash.groupby/-/lodash.groupby-4.6.0.tgz"
+  "version" "4.6.0"
+
+"lodash.isboolean@^3.0.3":
+  "integrity" "sha1-bC4XHbKiV82WgC/UOwGyDV9YcPY="
+  "resolved" "https://registry.npmjs.org/lodash.isboolean/-/lodash.isboolean-3.0.3.tgz"
+  "version" "3.0.3"
+
+"lodash.isequal@^4.5.0":
+  "integrity" "sha1-QVxEePK8wwEgwizhDtMib30+GOA="
+  "resolved" "https://registry.npmjs.org/lodash.isequal/-/lodash.isequal-4.5.0.tgz"
+  "version" "4.5.0"
+
+"lodash.isfunction@^3.0.9":
+  "integrity" "sha512-AirXNj15uRIMMPihnkInB4i3NHeb4iBtNg9WRWuK2o31S+ePwwNmDPaTL3o7dTJ+VXNZim7rFs4rxN4YU1oUJw=="
+  "resolved" "https://registry.npmjs.org/lodash.isfunction/-/lodash.isfunction-3.0.9.tgz"
+  "version" "3.0.9"
+
+"lodash.isnil@^4.0.0":
+  "integrity" "sha1-SeKM1VkBNFjIFMVHnTxmOiG/qmw="
+  "resolved" "https://registry.npmjs.org/lodash.isnil/-/lodash.isnil-4.0.0.tgz"
+  "version" "4.0.0"
+
+"lodash.isundefined@^3.0.1":
+  "integrity" "sha1-I+89lTVWUgOmbO/VuDD4SJEa+0g="
+  "resolved" "https://registry.npmjs.org/lodash.isundefined/-/lodash.isundefined-3.0.1.tgz"
+  "version" "3.0.1"
+
 "lodash.sortby@^4.7.0":
   "integrity" "sha1-7dFMgk4sycHgsKG0K7UhBRakJDg="
   "resolved" "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz"
   "version" "4.7.0"
+
+"lodash.uniq@^4.5.0":
+  "integrity" "sha1-0CJTc662Uq3BvILklFM5qEJ1R3M="
+  "resolved" "https://registry.npmjs.org/lodash.uniq/-/lodash.uniq-4.5.0.tgz"
+  "version" "4.5.0"
 
 "lodash@^4.17.13", "lodash@^4.17.3":
   "integrity" "sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA=="
@@ -1505,7 +1592,6 @@
     "raw-body" "2.4.1"
     "react-is" "16.13.1"
     "react-refresh" "0.8.3"
-    "sharp" "0.26.3"
     "stream-browserify" "3.0.0"
     "styled-jsx" "3.3.2"
     "use-subscription" "1.5.1"
@@ -1661,6 +1747,11 @@
   "integrity" "sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw=="
   "resolved" "https://registry.yarnpkg.com/pako/-/pako-1.0.11.tgz"
   "version" "1.0.11"
+
+"papaparse@^5.3.1":
+  "integrity" "sha512-Dbt2yjLJrCwH2sRqKFFJaN5XgIASO9YOFeFP8rIBRG2Ain8mqk5r1M6DkfvqEVozVcz3r3HaUGw253hA1nLIcA=="
+  "resolved" "https://registry.npmjs.org/papaparse/-/papaparse-5.3.1.tgz"
+  "version" "5.3.1"
 
 "parse-asn1@^5.0.0", "parse-asn1@^5.1.5":
   "integrity" "sha512-RnZRo1EPU6JBnra2vGHj0yhp6ebyjBZpmUCLHWiFhxlzvBCCpAuZ7elsBp1PVAbQN0/04VD/19rfzlBSwLstMw=="
